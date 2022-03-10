@@ -1,23 +1,36 @@
+/**
+ *
+ * @param s
+ * @returns {string}
+ * @constructor
+ *
+ * n = number of groups
+ * m = max num found in any group
+ * Time: O(n*m)
+ * Space: O(n*m)
+ */
 const UnCompress = (s) => {
   const result = [];
   const numbers = '0123456789';
 
-  let i = 0, j = 0;
+  let i = 0;
+  let j = 0;
 
   while (j < s.length) {
-    if (!numbers.includes(s[j])) {
-      const number = Number(s.slice(i, j));
+    let ch = s[j];
+    if (numbers.includes(ch)) {
+      j += 1;
+    } else {
+      let number = Number(s.slice(i, j));
 
-      for (let c = 0; c < number; c++) {
-        result.push(s[j]);
+      for (let k = 0; k < number; k += 1) {
+        result.push(ch);
       }
-
       j += 1;
       i = j;
-    } else {
-      j += 1;
     }
   }
+
   return result.join('');
 };
 
